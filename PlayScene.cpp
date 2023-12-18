@@ -1,7 +1,7 @@
 #include "PlayScene.h"
 #include"Ground.h"
 #include"Engine/Camera.h"
-#include"TankObject.h"
+#include"Tank.h"
 
 PlayScene::PlayScene(GameObject* parent)
 	: GameObject(parent, "PlayScene")
@@ -11,7 +11,9 @@ PlayScene::PlayScene(GameObject* parent)
 void PlayScene::Initialize()
 {
 	Instantiate<Ground>(this);
-	Instantiate<TankObject>(this);
+	Instantiate<Tank>(this);
+
+	//Camera::SetPosition();
 }
 
 void PlayScene::Update()

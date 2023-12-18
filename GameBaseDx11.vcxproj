@@ -150,7 +150,7 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="TankObject.cpp" />
+    <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,7 +179,7 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="TankObject.h" />
+    <ClInclude Include="Tank.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>

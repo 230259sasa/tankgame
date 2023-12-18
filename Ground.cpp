@@ -14,7 +14,6 @@ void Ground::Initialize()
 {
 	hModel_ = Model::Load("Model\\Ground.fbx");
 	assert(hModel_ >= 0);
-
 }
 
 void Ground::Update()
