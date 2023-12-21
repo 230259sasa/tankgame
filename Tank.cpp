@@ -12,6 +12,8 @@ void Tank::Initialize()
 {
 	hModel_ = Model::Load("Model\\tankbody.fbx");
 	assert(hModel_ >= 0);
+	front_ = { 0,0,1 };
+	speed_ = 0.1;
 }
 
 void Tank::Update()
@@ -25,6 +27,24 @@ void Tank::Update()
 	//âÒì]ÇµÇΩï˚å¸Ç…ëOêi
 	Debug::Log("angle = ", true);
 	Debug::Log(transform_.rotate_.y, true);
+	if (Input::IsKey(DIK_W)) {
+		XMMATRIX rotY = transform_.matRotate_;
+		XMVECTOR rotvec = XMVector3TransformCoord(front_, rotY);
+		XMVECTOR move;
+		move = speed_ * rotvec;
+		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
+		pos = pos + move;
+		XMStoreFloat3(&(transform_.position_), pos);
+	}
+	if (Input::IsKey(DIK_S)) {
+		XMMATRIX rotY = transform_.matRotate_;
+		XMVECTOR rotvec = XMVector3TransformCoord(front_, rotY);
+		XMVECTOR move;
+		move = speed_ * rotvec;
+		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
+		pos = pos - move;
+		XMStoreFloat3(&(transform_.position_), pos);
+	}
 }
 
 void Tank::Draw()

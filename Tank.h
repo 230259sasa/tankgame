@@ -4,6 +4,8 @@ class Tank :
     public GameObject
 {
     int hModel_;
+    XMVECTOR front_;
+    float speed_;
 public:
     Tank(GameObject* parent);
 
