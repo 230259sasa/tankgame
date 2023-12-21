@@ -2,6 +2,7 @@
 #include"Engine/Model.h"
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
+#include"Ground.h"
 
 Tank::Tank(GameObject* parent)
 	:GameObject(parent, "Tank"), hModel_(-1)
@@ -25,25 +26,35 @@ void Tank::Update()
 		transform_.rotate_.y -= 1.0f;
 	}
 	//‰ñ“]‚µ‚½•ûŒü‚É‘Oi
-	Debug::Log("angle = ", true);
-	Debug::Log(transform_.rotate_.y, true);
+	//Debug::Log("angle = ", true);
+	//Debug::Log(transform_.rotate_.y, true);
 	if (Input::IsKey(DIK_W)) {
-		XMMATRIX rotY = transform_.matRotate_;
+		XMMATRIX rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));//radian Šp“xH
 		XMVECTOR rotvec = XMVector3TransformCoord(front_, rotY);
-		XMVECTOR move;
-		move = speed_ * rotvec;
+		XMVECTOR move = speed_ * rotvec;
 		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 		pos = pos + move;
 		XMStoreFloat3(&(transform_.position_), pos);
 	}
 	if (Input::IsKey(DIK_S)) {
-		XMMATRIX rotY = transform_.matRotate_;
+		XMMATRIX rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
 		XMVECTOR rotvec = XMVector3TransformCoord(front_, rotY);
-		XMVECTOR move;
-		move = speed_ * rotvec;
+		XMVECTOR move = speed_ * rotvec;
 		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 		pos = pos - move;
 		XMStoreFloat3(&(transform_.position_), pos);
+	}
+
+	Ground* pGround = (Ground*)FindObject("Ground");
+	int hGmodel = pGround->GetModelHandle();
+	RayCastData data;
+	data.start = transform_.position_;
+	data.start.y = 0;
+	data.dir = XMFLOAT3({ 0,-1,0 });
+	Model::RayCast(hGmodel, &data);
+
+	if (data.hit == true) {
+		transform_.position_.y = -data.dist;
 	}
 }
 
