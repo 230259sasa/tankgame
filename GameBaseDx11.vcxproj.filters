@@ -24,6 +24,15 @@
       <UniqueIdentifier>{47a6a3f5-8cfd-436b-8d58-beccd108f3f3}</UniqueIdentifier>
       <Extensions>hlsl</Extensions>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{22147987-883c-4a2e-b5b3-7929fea774fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Play">
+      <UniqueIdentifier>{ec6592a8-e6d8-40c1-af61-3165ac610a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{2c5f78dc-2bf1-45ff-823e-9b908695b296}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -95,10 +104,21 @@
     <ClCompile Include="Engine\VFX.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="TankObject.cpp" />
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="TankHead.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -170,10 +190,21 @@
     <ClInclude Include="Engine\VFX.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="Ground.h" />
-    <ClInclude Include="TankObject.h" />
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="TankHead.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

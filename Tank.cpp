@@ -3,18 +3,21 @@
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
 #include"Ground.h"
+#include"TankHead.h"
 
 Tank::Tank(GameObject* parent)
-	:GameObject(parent, "Tank"), hModel_(-1)
+	:GameObject(parent, "Tank"), hModel_(-1), front_({ 0,0,1 }),speed_(0.1)
 {
 }
 
 void Tank::Initialize()
 {
-	hModel_ = Model::Load("Model\\tankbody.fbx");
+	hModel_ = Model::Load("Model\\TankBody.fbx");
 	assert(hModel_ >= 0);
 	front_ = { 0,0,1 };
 	speed_ = 0.1;
+
+	Instantiate<TankHead>(this);
 }
 
 void Tank::Update()
@@ -44,7 +47,7 @@ void Tank::Update()
 		pos = pos - move;
 		XMStoreFloat3(&(transform_.position_), pos);
 	}
-
+	
 	Ground* pGround = (Ground*)FindObject("Ground");
 	int hGmodel = pGround->GetModelHandle();
 	RayCastData data;
