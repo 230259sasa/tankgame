@@ -119,6 +119,9 @@
     <ClCompile Include="TankHead.cpp">
       <Filter>Scene\Play</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Scene\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -203,6 +206,9 @@
       <Filter>Scene\Play</Filter>
     </ClInclude>
     <ClInclude Include="TankHead.h">
+      <Filter>Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Scene\Play</Filter>
     </ClInclude>
   </ItemGroup>

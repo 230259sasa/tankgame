@@ -4,6 +4,7 @@ class TankHead :
     public GameObject
 {
     int hModel_;
+    bool isdown_;
 public:
     TankHead(GameObject* parent);
     ~TankHead();

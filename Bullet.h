@@ -1,14 +1,15 @@
 #pragma once
 #include "Engine\GameObject.h"
-class Tank :
+class Bullet :
     public GameObject
 {
     int hModel_;
-    XMVECTOR front_;
+    XMFLOAT3 moveDir_;
     float speed_;
 public:
-    Tank(GameObject* parent);
+    Bullet(GameObject* parent);
 
+    ~Bullet();
     //èâä˙âª
     void Initialize() override;
 
@@ -20,5 +21,8 @@ public:
 
     //äJï˙
     void Release() override;
+
+    void SetMoveDir(XMFLOAT3 _move) { moveDir_ = _move; }
+    void SetSpeed(float _speed) { speed_ = _speed; }
 };
 
