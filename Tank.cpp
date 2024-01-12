@@ -23,10 +23,10 @@ void Tank::Initialize()
 void Tank::Update()
 {
 	if (Input::IsKey(DIK_A)) {
-		transform_.rotate_.y += 1.0f;
+		transform_.rotate_.y -= 1.0f;
 	}
 	if (Input::IsKey(DIK_D)) {
-		transform_.rotate_.y -= 1.0f;
+		transform_.rotate_.y += 1.0f;
 	}
 	//‰ñ“]‚µ‚½•ûŒü‚É‘Oi
 	//Debug::Log("angle = ", true);

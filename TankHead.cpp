@@ -21,10 +21,10 @@ void TankHead::Initialize()
 void TankHead::Update()
 {
 	if (Input::IsKey(DIK_LEFT)) {
-		transform_.rotate_.y += 1.0f;
+		transform_.rotate_.y -= 1.0f;
 	}
 	if (Input::IsKey(DIK_RIGHT)) {
-		transform_.rotate_.y -= 1.0f;
+		transform_.rotate_.y += 1.0f;
 	}
 	if (Input::IsKey(DIK_SPACE)) {
 		if (isdown_) {
