@@ -2,7 +2,7 @@
 #include"Engine\Model.h"
 
 Bullet::Bullet(GameObject* parent)
-	:GameObject(parent,"Bullet"),hModel_(-1)
+	:GameObject(parent,"Bullet"),hModel_(-1),speed_(0)
 {
 }
 
@@ -14,17 +14,20 @@ void Bullet::Initialize()
 {
 	hModel_ = Model::Load("Model\\Bullet.fbx");
 	assert(hModel_ >= 0);
+
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.5f);
+	AddCollider(collision);
 }
 
 void Bullet::Update()
 {
-	transform_.position_.x = transform_.position_.x + moveDir_.x * speed_;
-	transform_.position_.y = transform_.position_.y + moveDir_.y * speed_;
-	transform_.position_.z = transform_.position_.z + moveDir_.z * speed_;
+	transform_.position_.x += moveDir_.x * speed_;
+	transform_.position_.y += moveDir_.y * speed_;
+	transform_.position_.z += moveDir_.z * speed_;
 
-	moveDir_.y -= 0.05;
+	moveDir_.y -= 0.03f;
 
-	if (transform_.position_.y < -10) {
+	if (transform_.position_.y < -3) {
 		KillMe();
 	}
 }
