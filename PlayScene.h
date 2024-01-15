@@ -1,8 +1,17 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/Text.h"
+#include <strstream>
+
+class Tank;
+
 class PlayScene :
     public GameObject
 {
+	int hPict_;
+	Text* pText;
+	Tank* player;
+	//std::stringstream str;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

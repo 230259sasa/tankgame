@@ -17,6 +17,9 @@ void Tank::Initialize()
 	front_ = { 0,0,1 };
 	speed_ = 0.1;
 
+	//SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.5f);
+	//AddCollider(collision);
+
 	Instantiate<TankHead>(this);
 }
 
@@ -65,6 +68,8 @@ void Tank::Draw()
 {
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
+
+	CollisionDraw();
 }
 
 void Tank::Release()

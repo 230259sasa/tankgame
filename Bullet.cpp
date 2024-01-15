@@ -14,7 +14,7 @@ void Bullet::Initialize()
 {
 	hModel_ = Model::Load("Model\\Bullet.fbx");
 	assert(hModel_ >= 0);
-
+	transform_.position_ = { 0,0,0 };
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.5f);
 	AddCollider(collision);
 }
@@ -36,6 +36,8 @@ void Bullet::Draw()
 {
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
+
+	CollisionDraw();
 }
 
 void Bullet::Release()

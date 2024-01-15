@@ -16,6 +16,9 @@ void TankHead::Initialize()
 {
 	hModel_ = Model::Load("Model\\TankHead.fbx");
 	assert(hModel_ >= 0);
+
+	//SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.5f);
+	//AddCollider(collision);
 }
 
 void TankHead::Update()
@@ -52,6 +55,8 @@ void TankHead::Draw()
 {
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
+
+	CollisionDraw();
 }
 
 void TankHead::Release()
