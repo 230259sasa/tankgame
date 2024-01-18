@@ -53,7 +53,7 @@ void PlayScene::Draw()
 
 	//pText->Draw(125, 30, str);
 	Image::SetTransform(hPict_, transform_);
-	Image::Draw(hPict_);
+	//Image::Draw(hPict_);
 }
 
 void PlayScene::Release()

@@ -16,8 +16,9 @@ void Enemy::Initialize()
 	hModel_ = Model::Load("Model\\Enemy.fbx");
 	assert(hModel_ >= 0);
 
-	float x = rand() % 2;
-	float z = rand() % 2;
+	float x = rand() % 28 - rand() % 28;
+	float z = rand() % 28 - rand() % 28;
+
 	transform_.position_.x = x;
 	transform_.position_.z = z;
 

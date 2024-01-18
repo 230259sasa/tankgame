@@ -44,23 +44,25 @@ void Tank::Update()
 	//‰ñ“]‚µ‚½•ûŒü‚É‘Oi
 	//Debug::Log("angle = ", true);
 	//Debug::Log(transform_.rotate_.y, true);
+	XMMATRIX rotY = XMMatrixIdentity();
+	XMVECTOR move{ 0,0,0,0 };
+	XMVECTOR rotvec{ 0,0,0,0 };
+	float dir = 0;
 	if (Input::IsKey(DIK_W)) {
-		XMMATRIX rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));//radian Šp“xH
-		XMVECTOR rotvec = XMVector3TransformCoord(front_, rotY);
-		XMVECTOR move = speed_ * rotvec;
-		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
-		pos = pos + move;
-		XMStoreFloat3(&(transform_.position_), pos);
+		dir = 1.0f;
 	}
 	if (Input::IsKey(DIK_S)) {
-		XMMATRIX rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));
-		XMVECTOR rotvec = XMVector3TransformCoord(front_, rotY);
-		XMVECTOR move = speed_ * rotvec;
-		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
-		pos = pos - move;
-		XMStoreFloat3(&(transform_.position_), pos);
+		dir = -1.0f;
 	}
-	
+	//‰ñ“]s—ñ‚ð‹‚ß‚é
+	rotY = XMMatrixRotationY(XMConvertToRadians(transform_.rotate_.y));//radian Šp“xH
+	//ƒxƒNƒgƒ‹‚Ì‰ñ“]Œ‹‰Ê‚ð‹‚ß‚é
+	rotvec = XMVector3TransformCoord(front_, rotY);
+	move = speed_ * rotvec;
+	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
+	pos = pos + dir * move;
+	XMStoreFloat3(&(transform_.position_), pos);
+
 	Ground* pGround = (Ground*)FindObject("Ground");
 	int hGmodel = pGround->GetModelHandle();
 	RayCastData data;
@@ -75,8 +77,9 @@ void Tank::Update()
 
 	if (Input::IsKeyDown(DIK_Z)) {
 		camState_++;
-		if (camState_ == CAM_TYPE::MAX_TYPE)
-			camState_ == CAM_TYPE::FIXED_TYPE;
+		if (camState_ == CAM_TYPE::MAX_TYPE) {
+			camState_ = CAM_TYPE::FIXED_TYPE;
+		}
 	}
 	switch (camState_) {
 	case CAM_TYPE::FIXED_TYPE:
@@ -85,17 +88,29 @@ void Tank::Update()
 		break;
 	case CAM_TYPE::TPS_NO_ROT_TYPE:
 		XMFLOAT3 camPos = transform_.position_;
-		camPos.y = transform_.position_.y + 5.0f;
+		camPos.y = transform_.position_.y + 15.0f;
 		camPos.z = transform_.position_.z - 10.0f;
 		Camera::SetPosition(camPos);
 		Camera::SetTarget(transform_.position_);
 		break;
-	case CAM_TYPE::TPS_TYPE:
-		Camera::SetPosition(XMFLOAT3(0, 20, -30));
-		Camera::SetTarget(XMFLOAT3(0, 0, 0));
+	case CAM_TYPE::TPS_TYPE: 
+	{
+		Camera::SetTarget(transform_.position_);
+		XMVECTOR vEye{ 0,20,-10,0 };
+		vEye = XMVector3TransformCoord(vEye, rotY);
+		XMFLOAT3 camPos;
+		XMStoreFloat3(&camPos, pos + vEye);
+		Camera::SetPosition(camPos);
 		break;
+	}
 	case CAM_TYPE::FPS_TYPE:
+	{
+		Camera::SetPosition(transform_.position_);
+		XMFLOAT3 camTarget;
+		XMStoreFloat3(&camTarget, pos + dir * move);
+		Camera::SetTarget(camTarget);
 		break;
+	}
 	case CAM_TYPE::MAX_TYPE:
 		break;
 	default:
