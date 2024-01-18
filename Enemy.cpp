@@ -16,6 +16,11 @@ void Enemy::Initialize()
 	hModel_ = Model::Load("Model\\Enemy.fbx");
 	assert(hModel_ >= 0);
 
+	float x = rand() % 2;
+	float z = rand() % 2;
+	transform_.position_.x = x;
+	transform_.position_.z = z;
+
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.6f);
 	AddCollider(collision);
 	Model::SetAnimFrame(hModel_, 1, 60, 1);

@@ -6,6 +6,10 @@
 #include"Enemy.h"
 #include"Engine\Image.h"
 
+namespace {
+	const int ENEMY_NUM{ 30 };
+}
+
 PlayScene::PlayScene(GameObject* parent)
 	: GameObject(parent, "PlayScene"), hPict_(-1), pText(nullptr)
 {
@@ -18,6 +22,10 @@ void PlayScene::Initialize()
 	Instantiate<Enemy>(this);
 	//Instantiate<TankHead>(this);
 	//Camera::SetPosition();
+
+	for (int i = 0; i < ENEMY_NUM; i++) {
+		Instantiate<Enemy>(this);
+	}
 
 	hPict_ = Image::Load("char.png");
 	assert(hPict_ >= 0);

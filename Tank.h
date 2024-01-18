@@ -6,6 +6,7 @@ class Tank :
     int hModel_;
     XMVECTOR front_;
     float speed_;
+    int camState_;//カメラタイプの指定
 public:
     Tank(GameObject* parent);
 
