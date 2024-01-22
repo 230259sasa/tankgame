@@ -5,13 +5,14 @@
 #include"TankHead.h"
 #include"Enemy.h"
 #include"Engine\Image.h"
+#include"HUD.h"
 
 namespace {
 	const int ENEMY_NUM{ 30 };
 }
 
 PlayScene::PlayScene(GameObject* parent)
-	: GameObject(parent, "PlayScene"), hPict_(-1), pText(nullptr)
+	: GameObject(parent, "PlayScene"), pText(nullptr),hImage_(-1)
 {
 }
 
@@ -19,16 +20,16 @@ void PlayScene::Initialize()
 {
 	Instantiate<Ground>(this);
 	player = Instantiate<Tank>(this);
-	Instantiate<Enemy>(this);
+	//Instantiate<Enemy>(this);
 	//Instantiate<TankHead>(this);
 	//Camera::SetPosition();
+	Instantiate<HUD>(this);
 
 	for (int i = 0; i < ENEMY_NUM; i++) {
-		Instantiate<Enemy>(this);
+		Enemy* e;
+		e = Instantiate<Enemy>(this);
+		enemy.push_back(e);
 	}
-
-	hPict_ = Image::Load("char.png");
-	assert(hPict_ >= 0);
 
 	pText = new Text;
 	pText->Initialize();
@@ -44,16 +45,16 @@ void PlayScene::Update()
 
 	//Image::SetRect(hPict_, 50, 100, 256, );
 	//EnemyêîÇ¶ÇÈ
-	//if (FindObject("Enemy") != nullptr)
+	eCount_ = 0;
+	for (int i = 0; i < enemy.size(); i++) {
+		if (!enemy[i]->IsDead())
+			eCount_++;
+	}
 }
 
 void PlayScene::Draw()
 {
-	pText->Draw(30, 30, "Enemy:");
-
-	//pText->Draw(125, 30, str);
-	Image::SetTransform(hPict_, transform_);
-	//Image::Draw(hPict_);
+	pText->Draw(125, 30, eCount_);
 }
 
 void PlayScene::Release()

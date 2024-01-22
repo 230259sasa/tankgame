@@ -1,15 +1,12 @@
 #pragma once
 #include "Engine\GameObject.h"
-class Enemy :
+class HUD :
     public GameObject
 {
-    int hModel_;
-    float speed_;
-    bool isAlive_;
+    int hImage_;
 public:
-    Enemy(GameObject* parent);
+    HUD(GameObject* parent);
 
-    ~Enemy();
     //‰Šú‰»
     void Initialize() override;
 
@@ -21,9 +18,5 @@ public:
 
     //ŠJ•ú
     void Release() override;
-
-    void OnCollision(GameObject* pTarget);
-
-    bool GetIsAlive() { return isAlive_; }
 };
 

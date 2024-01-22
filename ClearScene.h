@@ -1,25 +1,14 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include "Engine/Text.h"
-#include <sstream>
-#include<vector>
 
-class Tank;
-class Enemy;
-
-class PlayScene :
+class ClearScene :
     public GameObject
 {
 	int hImage_;
-	Text* pText;
-	Tank* player;
-	std::vector<Enemy*> enemy;
-	std::stringstream str;
-	int eCount_;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	PlayScene(GameObject* parent);
+	ClearScene(GameObject* parent);
 
 	//初期化
 	void Initialize() override;

@@ -3,7 +3,7 @@
 #include"Ground.h"
 
 Enemy::Enemy(GameObject* parent)
-	:GameObject(parent,"Enemy"),hModel_(-1),speed_(0)
+	:GameObject(parent,"Enemy"),hModel_(-1),speed_(0),isAlive_(true)
 {
 }
 
@@ -16,11 +16,14 @@ void Enemy::Initialize()
 	hModel_ = Model::Load("Model\\Enemy.fbx");
 	assert(hModel_ >= 0);
 
-	float x = rand() % 28 - rand() % 28;
-	float z = rand() % 28 - rand() % 28;
+	float x = (float)rand() / RAND_MAX;
+	x = 2.0 * x;
+	transform_.position_.x = 25.0 * (x - 1.0);
 
-	transform_.position_.x = x;
-	transform_.position_.z = z;
+	float z = (float)rand() / RAND_MAX;
+	z = 2.0 * z;
+	transform_.position_.z = 25.0 * (z - 1.0);
+	transform_.position_.y = 0;
 
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0, 0), 0.6f);
 	AddCollider(collision);
@@ -58,6 +61,7 @@ void Enemy::OnCollision(GameObject* pTarget)
 {
 	if (pTarget->GetObjectName() == "Bullet")
 	{
+		isAlive_ = false;
 		this->KillMe();
 		pTarget->KillMe();
 	}

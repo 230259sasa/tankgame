@@ -74,7 +74,6 @@ public:
 	bool IsEntered();		// Update実行していいか
 	bool IsVisibled();		// Draw実行していいか
 
-
 	//子オブジェクトリストを取得
 	//戻値：子オブジェクトリスト
 	std::list<GameObject*>* GetChildList();

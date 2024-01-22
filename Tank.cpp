@@ -81,18 +81,23 @@ void Tank::Update()
 			camState_ = CAM_TYPE::FIXED_TYPE;
 		}
 	}
+
 	switch (camState_) {
 	case CAM_TYPE::FIXED_TYPE:
+	{
 		Camera::SetPosition(XMFLOAT3(0, 20, -20));
 		Camera::SetTarget(XMFLOAT3(0, 0, 0));
 		break;
+	}
 	case CAM_TYPE::TPS_NO_ROT_TYPE:
+	{
 		XMFLOAT3 camPos = transform_.position_;
 		camPos.y = transform_.position_.y + 15.0f;
 		camPos.z = transform_.position_.z - 10.0f;
 		Camera::SetPosition(camPos);
 		Camera::SetTarget(transform_.position_);
 		break;
+	}
 	case CAM_TYPE::TPS_TYPE: 
 	{
 		Camera::SetTarget(transform_.position_);
@@ -105,16 +110,21 @@ void Tank::Update()
 	}
 	case CAM_TYPE::FPS_TYPE:
 	{
-		Camera::SetPosition(transform_.position_);
+		XMFLOAT3 t = transform_.position_;
+		Camera::SetPosition(t);
 		XMFLOAT3 camTarget;
-		XMStoreFloat3(&camTarget, pos + dir * move);
+		XMStoreFloat3(&camTarget, pos + move);
 		Camera::SetTarget(camTarget);
 		break;
 	}
 	case CAM_TYPE::MAX_TYPE:
+	{
 		break;
+	}
 	default:
+	{
 		break;
+	}
 	}
 }
 
