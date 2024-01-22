@@ -4,6 +4,7 @@ class HUD :
     public GameObject
 {
     int hImage_;
+    Transform tHub_;
 public:
     HUD(GameObject* parent);
 
