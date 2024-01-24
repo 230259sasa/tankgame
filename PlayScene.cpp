@@ -6,13 +6,14 @@
 #include"Enemy.h"
 #include"Engine\Image.h"
 #include"HUD.h"
+#include "Engine/SceneManager.h"
 
 namespace {
 	const int ENEMY_NUM{ 30 };
 }
 
 PlayScene::PlayScene(GameObject* parent)
-	: GameObject(parent, "PlayScene"), pText(nullptr),hImage_(-1)
+	: GameObject(parent, "PlayScene")
 {
 }
 
@@ -23,7 +24,6 @@ void PlayScene::Initialize()
 	//Instantiate<Enemy>(this);
 	//Instantiate<TankHead>(this);
 	//Camera::SetPosition();
-	Instantiate<HUD>(this);
 
 	for (int i = 0; i < ENEMY_NUM; i++) {
 		Enemy* e;
@@ -31,30 +31,35 @@ void PlayScene::Initialize()
 		enemy.push_back(e);
 	}
 
-	pText = new Text;
-	pText->Initialize();
+	phud = Instantiate<HUD>(this);
 }
 
 void PlayScene::Update()
 {
-	Camera::SetTarget(player->GetPosition());
+	/*Camera::SetTarget(player->GetPosition());
 	XMFLOAT3 camPos = player->GetPosition();
 	camPos.y += 8;
 	camPos.z -= 15;
-	Camera::SetPosition(camPos);
+	Camera::SetPosition(camPos);*/
 
 	//Image::SetRect(hPict_, 50, 100, 256, );
 	//EnemyêîÇ¶ÇÈ
 	eCount_ = 0;
 	for (int i = 0; i < enemy.size(); i++) {
-		if (!enemy[i]->IsDead())
+		if (!enemy[i]->IsDead()) {
 			eCount_++;
+		}
+	}
+
+	phud->SetEnemyNum(eCount_);
+	if (eCount_ <= 0) {
+		SceneManager* pSM = (SceneManager*)(FindObject("SceneManager"));
+		pSM->ChangeScene(SCENE_ID_CLEAR);
 	}
 }
 
 void PlayScene::Draw()
 {
-	pText->Draw(125, 30, eCount_);
 }
 
 void PlayScene::Release()

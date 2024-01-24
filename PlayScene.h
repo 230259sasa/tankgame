@@ -6,15 +6,14 @@
 
 class Tank;
 class Enemy;
+class HUD;
 
 class PlayScene :
     public GameObject
 {
-	int hImage_;
-	Text* pText;
 	Tank* player;
+	HUD* phud;
 	std::vector<Enemy*> enemy;
-	std::stringstream str;
 	int eCount_;
 public:
 	//コンストラクタ
