@@ -3,7 +3,7 @@
 
 namespace HUDSetting {
     const int NWidth(256 / 10);
-    const int NHeight(70 / 1);
+    const int NHeight(35 / 1);
 }
 
 

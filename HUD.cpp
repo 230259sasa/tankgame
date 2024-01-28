@@ -16,7 +16,7 @@ void HUD::Initialize()
 	tHub_.scale_.y = 0.1;
 	tHub_.position_ = { -0.8,0.9,1.0 };
 
-	hNumber_ = Image::Load("char88.png");
+	hNumber_ = Image::Load("number.png");
 	assert(hNumber_ >= 0);
 	tNumbers[0].position_ = { -0.65,0.9,1.0 };
 	tNumbers[1].position_ = { -0.7,0.9,1.0 };
@@ -31,11 +31,11 @@ void HUD::Draw()
 	Image::SetTransform(hImage_, tHub_);
 	Image::Draw(hImage_);
 
-	Image::SetRect(hNumber_, HS::NWidth * (num_ /  10) , 0, HS::NWidth, HS::NHeight);
+	Image::SetRect(hNumber_, HS::NWidth * (num_ %  10) +2 , 0, HS::NWidth, HS::NHeight);
 	Image::SetTransform(hNumber_,tNumbers[0]);
 	Image::Draw(hNumber_);
 
-	Image::SetRect(hNumber_, HS::NWidth * (num_ / 10 ), 0, HS::NWidth, HS::NHeight);
+	Image::SetRect(hNumber_, HS::NWidth * (num_ / 10 ) + 2, 0, HS::NWidth, HS::NHeight);
 	Image::SetTransform(hNumber_, tNumbers[1]);
 	Image::Draw(hNumber_);
 }

@@ -9,7 +9,7 @@
 #include "Engine/SceneManager.h"
 
 namespace {
-	const int ENEMY_NUM{ 30 };
+	const int ENEMY_NUM{ 20 };
 }
 
 PlayScene::PlayScene(GameObject* parent)
